@@ -8,13 +8,17 @@ var server = require('http').createServer()
 import { createStore,applyMiddleware } from 'redux';
 import ReduxShareServer from './redux-share-server';
 
-// function reducer(state = {count : 0}, action) {
-//   switch (action.type) {
-//     case "NEW_ENABLEMENT":
-//       return Object.assign({}, state, { count : state.count + 1 });
-//   }
-// }
-import { reducers } from '../../kiosk/src/reducer';
+function reducers(state, action) {
+  switch (action.type) {
+    case "NEW_ENABLEMENT":
+      return Object.assign({}, state, { count : (state.count || 0) + 1 });
+
+    default:
+  }
+
+  return Object.assign({}, state);
+}
+
 
 //start the sockets etc.
 var shareServer = new ReduxShareServer(server,{
@@ -23,7 +27,7 @@ var shareServer = new ReduxShareServer(server,{
 });
 
 //create the store.
-var store = createStore(reducers, {default:"default"},applyMiddleware( shareServer.getReduxMiddleware()));
+var store = createStore(reducers, null,applyMiddleware( shareServer.getReduxMiddleware()));
 
 
 

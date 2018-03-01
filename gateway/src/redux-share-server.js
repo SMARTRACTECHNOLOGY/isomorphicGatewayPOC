@@ -263,7 +263,7 @@ class ReduxShareServer {
         this.broadcastAction(action,s => s !== socket);
       }.bind(this));
 
-      this.sendToAction({ type: '@@SERVER-INIT-STATE', state: this.store.getState() || {} }, socket);
+      this.sendToAction({ type: '@@SERVER-INIT-STATE', state: this.store.getState()}, socket);
 
     }.bind(this));
     this.readyToServe = true;
