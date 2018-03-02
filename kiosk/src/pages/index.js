@@ -1,5 +1,7 @@
 import Login from './login';
-import Kiosk from './kiosk';
+import Landing from './landing';
+import ProcessCard from './processCard';
+import PageRouter from './pageRouter';
 
 
-export { Login, Kiosk }
+export { Login, Landing, PageRouter, ProcessCard }

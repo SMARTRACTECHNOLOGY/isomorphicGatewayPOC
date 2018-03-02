@@ -19,7 +19,7 @@ function Login(props) {
   const {} = props;
 
   return (
-        <div>
+        <div className="animated fadeIn">
           <img src={logo} alt="logo"  style={styles.logo}/>
           <h2 style={styles.title}>Tap your badge to sign in.</h2>
         </div>

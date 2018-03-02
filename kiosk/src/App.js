@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import {createStore, applyMiddleware} from 'redux';
-import { Provider } from 'react-redux'
+import {connect, Provider} from 'react-redux'
 
 import './App.css';
 import Reboot from 'material-ui/Reboot';
-import { Login, Kiosk } from './pages';
+import { PageRouter } from './pages';
 import { reducers } from './reducer';
-import Grid from 'material-ui/Grid';
 import SyncReduxClient from './lib/redux-share-client';
 
 let reduxShare = new SyncReduxClient('ws://localhost:2000', { debug : true});
@@ -18,37 +17,13 @@ let store = createStore(
 // This action starts the connection to the server.
 store.dispatch({type:"@@SYNC-CONNECT-SERVER-START"});
 
-let style = {
-  'backgroundColor': `rgb(3, 86, 109)`,
-  width: '100%',
-  height: '100%',
-  position: 'fixed',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  alignContent: 'center'
-}
-
 class App extends Component {
   render() {
-    let page = this.state ? this.state.page : '';
-
-    let currentPageComponent = <Kiosk/>;
-
-    switch (page) {
-      case "login":
-        currentPageComponent = <Login/>;
-      case "test":
-      default:
-    }
-
     return (
       <Provider store={store}>
         <div className="App">
           <Reboot/>
-          <Grid container className="kiosk-container" style={style}>
-            {currentPageComponent}
-          </Grid>
+          <PageRouter/>
         </div>
       </Provider>
     );
@@ -56,3 +31,4 @@ class App extends Component {
 }
 
 export default App;
+
