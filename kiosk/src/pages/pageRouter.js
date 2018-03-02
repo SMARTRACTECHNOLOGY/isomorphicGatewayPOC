@@ -1,5 +1,4 @@
 import React from 'react';
-import Grid from 'material-ui/Grid';
 import {connect} from "react-redux";
 import { Landing, Login } from '.';
 
@@ -33,9 +32,9 @@ function PageRouter(props) {
 
   console.log(page);
 
-  return (<Grid container className="kiosk-container" style={style}>
+  return (<div className="kiosk-container" style={style}>
     {currentPageComponent}
-  </Grid>)
+  </div>)
 }
 
 

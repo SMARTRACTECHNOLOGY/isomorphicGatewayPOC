@@ -55,11 +55,11 @@ function Landing(props) {
       }
     }];
 
-  return (<div className="animated fadeInRightBig" style={styles.landing}>
+  return (<div className="animated fadeInRight" style={styles.landing}>
       {cards.map(card=> {
         return (
           <div style={styles.card}>
-            <ProcessCard cardDetail={card} onEnablement={onNewEnablement} justify="center"/>
+            <ProcessCard cardDetail={card} onEnablement={onNewEnablement} justify="center" key={card.name}/>
           </div>
         )
       })}
