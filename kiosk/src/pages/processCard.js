@@ -4,7 +4,6 @@ import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
 import { connect } from 'react-redux'
-import {newEnablement} from '../actions'
 
 const styles = {
   card: {
@@ -27,10 +26,10 @@ const styles = {
 };
 
 function ProcessCard(props) {
-  const { classes, cardDetail, onEnablement } = props;
+  const { classes, cardDetail, onProcessDetail } = props;
 
   return (
-    <div onClick={() => onEnablement(cardDetail)}>
+    <div onClick={() => { if(onProcessDetail) { onProcessDetail(cardDetail) }}}>
       <Card className={classes.card}>
         <CardMedia
           className={classes.media}
@@ -57,11 +56,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    onNewEnablement: () => {
-      dispatch(newEnablement())
-    }
-  }
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ProcessCard));

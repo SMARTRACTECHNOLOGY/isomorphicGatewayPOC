@@ -41,19 +41,20 @@ const defaultCardsForDemostration = [{
 
 function reducers(state, action) {
   switch (action.type) {
-    case "NEW_ENABLEMENT":
-      return Object.assign({}, state, { count : (state.count || 0) + 1 });
-
     case "PAGE" :{
       switch(action.page) {
         case "LANDING":
           let cards = state.cards || action.cards || defaultCardsForDemostration;
           return Object.assign({}, state, { page : action.page, cards : cards });
+
+        case "PROCESS_DETAIL":
+          let card = action.card;
+          return Object.assign({}, state, { page : action.page, currentCard : card });
+
         default:
           return Object.assign({}, state, { page : action.page });
       }
     }
-
 
     default:
   }

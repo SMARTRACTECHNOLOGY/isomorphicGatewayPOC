@@ -1,8 +1,9 @@
 export const NEW_ENABLEMENT = "NEW_ENABLEMENT"
 
-export function newEnablement(detail) {
+export function showProcessDetail(detail) {
   return {
-    type: NEW_ENABLEMENT,
-    detail: detail
+    type: "PAGE",
+    page: "PROCESS_DETAIL",
+    card: detail
   }
 }

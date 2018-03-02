@@ -5,7 +5,7 @@ import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
 import { connect } from 'react-redux'
-import {newEnablement} from '../actions'
+import {showProcessDetail} from '../actions'
 import { ProcessCard } from '.';
 
 let styles = {
@@ -22,44 +22,13 @@ let styles = {
 }
 
 function Landing(props) {
-  const { classes, count, onNewEnablement } = props;
-
-  let cards = [{
-    imageUrl: "https://www.adidas.com/dis/dw/image/v2/aaqx_prd/on/demandware.static/-/Sites-adidas-products/en_US/dw24d21a41/zoom/CQ2128_01_standard.jpg?sh=840&strip=false&sw=840",
-    name: "Adidas busenitz",
-    enablement: {
-      total: 200,
-      completed: 20
-    }
-  },
-    {
-      imageUrl: "https://www.adidas.com/dis/dw/image/v2/aaqx_prd/on/demandware.static/-/Sites-adidas-products/en_US/dw3c05e2f0/zoom/DA9165_01_standard.jpg?sh=840&strip=false&sw=840",
-      name: "ULTRABOOST SHOES",
-      enablement: {
-        total: 300,
-        completed: 5
-      }
-    }, {
-      imageUrl: "https://www.adidas.com/dis/dw/image/v2/aaqx_prd/on/demandware.static/-/Sites-adidas-products/en_US/dwd7f20e28/zoom/AH2219_01_standard.jpg?sh=840&strip=false&sw=840",
-      name: "HARDEN VOL. 2 SHOES",
-      enablement: {
-        total: 150,
-        completed: 0
-      }
-    }, {
-      imageUrl: "https://www.adidas.com/dis/dw/image/v2/aaqx_prd/on/demandware.static/-/Sites-adidas-products/en_US/dw3b495bc6/zoom/AQ0352_01_standard.jpg?sh=840&strip=false&sw=840",
-      name: "SUPERSTAR WHITE ",
-      enablement: {
-        total: 200,
-        completed: 20
-      }
-    }];
+  const { classes, count, showProcessDetail, cards } = props;
 
   return (<div className="animated fadeInRight" style={styles.landing}>
       {cards.map(card=> {
         return (
           <div style={styles.card}>
-            <ProcessCard cardDetail={card} onEnablement={onNewEnablement} justify="center" key={card.name}/>
+            <ProcessCard cardDetail={card} onProcessDetail={showProcessDetail} justify="center" key={card.name}/>
           </div>
         )
       })}
@@ -74,8 +43,10 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onNewEnablement: (detail) => {
-      dispatch(newEnablement(detail))
+    showProcessDetail: (detail) => {
+      console.log("detail is ====>");
+      console.log(detail)
+      dispatch(showProcessDetail(detail))
     }
   }
 }

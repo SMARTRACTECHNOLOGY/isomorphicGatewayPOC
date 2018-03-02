@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import { Landing, Login } from '.';
+import { Landing, Login, ProcessDetail } from '.';
 
 let style = {
   'backgroundColor': `rgb(3, 86, 109)`,
@@ -16,7 +16,7 @@ let style = {
 
 
 function PageRouter(props) {
-  let page = props.page;
+  const { page } = props;
 
   let currentPageComponent = <Login/>;
 
@@ -27,10 +27,12 @@ function PageRouter(props) {
     case "LANDING":
       currentPageComponent = <Landing/>;
       break;
+
+    case "PROCESS_DETAIL":
+      currentPageComponent = <ProcessDetail/>
+      break;
     default:
   }
-
-  console.log(page);
 
   return (<div className="kiosk-container" style={style}>
     {currentPageComponent}
