@@ -33,7 +33,7 @@ class App extends Component {
   render() {
     let page = this.state ? this.state.page : '';
 
-    let currentPageComponent = <Login/>;
+    let currentPageComponent = <Kiosk/>;
 
     switch (page) {
       case "login":
