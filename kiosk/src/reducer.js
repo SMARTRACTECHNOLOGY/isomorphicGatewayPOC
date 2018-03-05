@@ -48,6 +48,8 @@ export function reducers(state = {count : 0}, action) {
       }
     }
 
+
+
     // Client side only reducer
     case "@@SERVER-INIT-STATE":
       return Object.assign(({}, action.state || {count : 0}));
