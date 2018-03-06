@@ -41,12 +41,28 @@ export function reducers(state = {count : 0}, action) {
 
         case "PROCESS_DETAIL":
           let card = action.card;
-          return Object.assign({}, state, { page : action.page, currentCard : card });
+          return Object.assign({}, state, { page : action.page, currentCard : card, nfcStatus : false, qrStatus: false, barCodeStatus: false });
 
         default:
           return Object.assign({}, state, { page : action.page });
       }
+      break;
     }
+
+    case "NFC_SCANNED" :
+      let nfcStatus = state.nfcStatus;
+      return Object.assign({}, state, { nfcStatus : !nfcStatus });
+      break;
+
+    case "QR_SCANNED" :
+      let qrStatus = state.qrStatus;
+      return Object.assign({}, state, { qrStatus : !qrStatus });
+      break;
+
+    case "BARCODE_SCANNED" :
+      let barCodeStatus = state.barCodeStatus;
+      return Object.assign({}, state, { barCodeStatus : !barCodeStatus });
+      break;
 
     // Client side only reducer
     case "@@SERVER-INIT-STATE":

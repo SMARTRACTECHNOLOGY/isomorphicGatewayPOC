@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import { Landing, Login, ProcessDetail } from '.';
+import { Landing, Login, ProcessDetail, ProcessList } from '.';
 
 let style = {
   'backgroundColor': `rgb(3, 86, 109)`,
@@ -29,7 +29,11 @@ function PageRouter(props) {
       break;
 
     case "PROCESS_DETAIL":
-      currentPageComponent = <ProcessDetail/>
+      currentPageComponent = <ProcessDetail/>;
+      break;
+
+    case "PROCESS_LIST":
+      currentPageComponent = <ProcessList />;
       break;
     default:
   }
