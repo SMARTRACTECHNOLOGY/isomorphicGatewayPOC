@@ -67,6 +67,11 @@ export function reducers(state = {count : 0}, action) {
       return Object.assign({}, state, { barCodeStatus : !barCodeStatus });
       break;
 
+
+    case "SUBMIT_ENABLEMENT_DATA" :
+      return Object.assign({}, state, {page : "SUCCESS", nfcStatus : false, qrStatus: false, barCodeStatus: false});
+      break;
+
     // Client side only reducer
     case "@@SERVER-INIT-STATE":
       return Object.assign(({}, action.state || {count : 0}));

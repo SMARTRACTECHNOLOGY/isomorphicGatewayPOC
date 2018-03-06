@@ -17,10 +17,10 @@ let styles = {
 };
 
 function ProcessList(props) {
-  return (<div style={styles.landing} className="animated fadeInDown">
-    <ProcessStep type="NFC"/>
-    <ProcessStep type="QR"/>
-    <ProcessStep type="BARCODE"/>
+  return (<div style={styles.landing} >
+    <div className="animated fadeInLeft"><ProcessStep type="NFC"/></div>
+    <div className="animated fadeIn"><ProcessStep type="QR"/></div>
+    <div className="animated fadeInRight"><ProcessStep type="BARCODE"/></div>
   </div>)
 }
 
