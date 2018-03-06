@@ -97,6 +97,7 @@ app.use('/redux',shareServer.getExpressMiddleware());
 //bind http and express
 server.on('request', app);
 
+
 store.dispatch({type:"@@SERVER-LISTEN-START"});
 
 server.listen(port, function () { 
@@ -105,4 +106,12 @@ server.listen(port, function () {
 	console.log('curl -H "Content-Type: application/json" -X POST -d \'{"type":"my-action"}\'  http://localhost:'+server.address().port+'/redux/action');
 });
 
-new BarcodeReader(store).run();
+var barcodeReader = new BarcodeReader(store);
+barcodeReader.run();
+
+process.on('SIGINT', function() {
+  console.log( "\nGracefully shutting down from SIGINT (Ctrl-C)" );
+  // some other closing procedures go here
+  barcodeReader.shutDown();
+  process.exit(1);
+});

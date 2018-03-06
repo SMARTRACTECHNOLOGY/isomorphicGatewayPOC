@@ -24,6 +24,12 @@ class BarcodeReader {
     this.initBarcodeReaderAutoDetection();
   }
 
+  shutDown(){
+    console.log('stop monitoring');
+    usbDetect.stopMonitoring();
+    console.log('SUCCESS!');
+  }
+
   initBarcodeReaderAutoDetection(){
     usbDetect.startMonitoring();
     usbDetect.on('add', device => {
@@ -62,6 +68,8 @@ class BarcodeReader {
     })
     .catch(e=>console.log(e));
   }
+
+  
 
   activateBarcodeReader(comportName){
     const port = new SerialPort(comportName);
