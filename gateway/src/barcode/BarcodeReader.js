@@ -33,23 +33,31 @@ class BarcodeReader {
   initBarcodeReaderAutoDetection(){
     usbDetect.startMonitoring();
     usbDetect.on('add', device => {
-      console.log(device.deviceName)
-      if(device.deviceName === 'Omni-Directional Imaging Scanner'){
-        let interval;
-        interval = setInterval(() => {
-          SerialPort.list().then(ports=>{
-            var barcodePorts = ports.filter(port=>port.manufacturer === 'Datalogic ADC, Inc.');
-            if(barcodePorts && barcodePorts.length >0){
-              clearInterval(interval);
-              return barcodePorts[0].comName;
+        if(device.deviceName){
+            if(device.deviceName.startsWith('Omni-Directional')){
+                let interval;
+                interval = setInterval(() => {
+                    console.log('listing ports');
+                    SerialPort.list().then(ports=>{
+
+                        var barcodePorts = ports.filter(port=>{
+                            console.log(port);
+                            return port.manufacturer.startsWith('Datalogic');
+                        });
+                        if(barcodePorts && barcodePorts.length >0){
+                            clearInterval(interval);
+                            return barcodePorts[0].comName;
+                        }
+                    })
+                        .then(comportName => {
+                            if(comportName)this.activateBarcodeReader(comportName)
+                        })
+                        .catch(e=>console.log('error', e));
+                }, 2000);
             }
-          })
-          .then(comportName => {
-            if(comportName)this.activateBarcodeReader(comportName)
-          })
-          .catch(e=>console.log(e));
-        }, 2000);
-      }
+        }
+        // Omni-Directional_Imaging_Scanner
+
     });
   }
 

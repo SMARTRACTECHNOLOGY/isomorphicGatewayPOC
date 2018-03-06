@@ -97,7 +97,6 @@ app.use('/redux',shareServer.getExpressMiddleware());
 //bind http and express
 server.on('request', app);
 
-
 store.dispatch({type:"@@SERVER-LISTEN-START"});
 
 server.listen(port, function () { 
