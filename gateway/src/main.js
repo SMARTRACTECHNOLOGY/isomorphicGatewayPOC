@@ -97,6 +97,12 @@ app.use('/redux',shareServer.getExpressMiddleware());
 //bind http and express
 server.on('request', app);
 
+const destroy = () => {
+  console.log('DESTROY!!!!')
+}
+
+server.on('close', destroy)
+
 store.dispatch({type:"@@SERVER-LISTEN-START"});
 
 server.listen(port, function () { 
