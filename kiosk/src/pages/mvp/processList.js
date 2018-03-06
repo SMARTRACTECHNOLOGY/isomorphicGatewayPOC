@@ -17,8 +17,6 @@ let styles = {
 };
 
 function ProcessList(props) {
-  const { classes, count, showProcessDetail, cards } = props;
-
   return (<div style={styles.landing} className="animated fadeInDown">
     <ProcessStep type="NFC"/>
     <ProcessStep type="QR"/>
