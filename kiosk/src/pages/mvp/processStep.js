@@ -76,7 +76,7 @@ function ProcessStep(props) {
 
   return (<Card style={styles.card} className={ticked ? "animated tada" : ""}>
       {typeComponent}
-      {ticked && <img src={tickIcon} alt="tick" style={styles.tickImage} />}
+      {ticked && <img src={tickIcon} alt="tick" style={styles.tickImage}/>}
   </Card>)
 }
 

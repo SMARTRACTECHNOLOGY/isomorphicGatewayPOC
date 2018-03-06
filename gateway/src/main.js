@@ -8,6 +8,24 @@ var server = require('http').createServer()
 import { createStore,applyMiddleware } from 'redux';
 import ReduxShareServer from './redux-share-server';
 
+
+function observeStore(store, onChange) {
+  let currentState;
+
+  function handleChange() {
+    let nextState = store.getState();
+    if (nextState !== currentState) {
+      currentState = nextState;
+      onChange(currentState);
+    }
+  }
+
+  let unsubscribe = store.subscribe(handleChange);
+  handleChange();
+  return unsubscribe;
+}
+
+
 const defaultCardsForDemostration = [{
   imageUrl: "https://www.adidas.com/dis/dw/image/v2/aaqx_prd/on/demandware.static/-/Sites-adidas-products/en_US/dw24d21a41/zoom/CQ2128_01_standard.jpg?sh=840&strip=false&sw=840",
   name: "Adidas busenitz",
@@ -75,6 +93,10 @@ function reducers(state, action) {
       return Object.assign({}, state, { barCodeStatus : !barCodeStatus });
       break;
 
+    case "SUBMIT_ENABLEMENT_DATA" :
+      return Object.assign({}, state, {page : "SUCCESS"});
+      break;
+
     default:
   }
 
@@ -92,6 +114,14 @@ var shareServer = new ReduxShareServer(server,{
 var store = createStore(reducers, null,applyMiddleware( shareServer.getReduxMiddleware()));
 
 
+//observe if all 3 types ticked, then trigger another action to show successful message
+observeStore(store,  (currentState) => {
+  if(currentState.nfcStatus && currentState.qrStatus && currentState.barCodeStatus && currentState.page === 'PROCESS_LIST') {
+    setTimeout(()=> {
+      store.dispatch({type: "SUBMIT_ENABLEMENT_DATA", data: "SAMPLE DATA, just for demo purpose"});
+    }, 1000);
+  }
+});
 
 //bind redux server and express
 app.use('/redux',shareServer.getExpressMiddleware());
