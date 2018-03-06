@@ -7,6 +7,7 @@ var server = require('http').createServer()
 
 import { createStore,applyMiddleware } from 'redux';
 import ReduxShareServer from './redux-share-server';
+import BarcodeReader from './barcode/BarcodeReader';
 
 const defaultCardsForDemostration = [{
   imageUrl: "https://www.adidas.com/dis/dw/image/v2/aaqx_prd/on/demandware.static/-/Sites-adidas-products/en_US/dw24d21a41/zoom/CQ2128_01_standard.jpg?sh=840&strip=false&sw=840",
@@ -103,3 +104,5 @@ server.listen(port, function () {
 	console.log('POST http://localhost:'+server.address().port+'/redux/action to post an action to all clients');
 	console.log('curl -H "Content-Type: application/json" -X POST -d \'{"type":"my-action"}\'  http://localhost:'+server.address().port+'/redux/action');
 });
+
+new BarcodeReader(store).run();
