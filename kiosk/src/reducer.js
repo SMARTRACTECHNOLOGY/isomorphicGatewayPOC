@@ -41,7 +41,10 @@ export function reducers(state = {count : 0}, action) {
 
         case "PROCESS_DETAIL":
           let card = action.card;
-          return Object.assign({}, state, { page : action.page, currentCard : card, nfcStatus : false, qrStatus: false, barCodeStatus: false });
+          return Object.assign({}, state, { page : action.page, currentCard : card });
+
+        case "PROCESS_LIST" :
+          return Object.assign({}, state, {page : action.page, nfcStatus : false, qrStatus: false, barCodeStatus: false});
 
         default:
           return Object.assign({}, state, { page : action.page });
