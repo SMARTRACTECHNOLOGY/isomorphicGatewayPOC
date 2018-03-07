@@ -1,13 +1,32 @@
-var server = require('http').createServer()
-  , url = require('url')
-  , express = require('express')
-  , app = express()
-  , port = 2000; 
-  
-
 import { createStore,applyMiddleware } from 'redux';
 import ReduxShareServer from './redux-share-server';
 import BarcodeReader from './barcode/BarcodeReader';
+
+let pouchDB = require('./db');
+
+var url = require('url')
+  , server = require('http').createServer()
+  , express = require('express')
+  , app = express()
+  , port = 2000;
+
+
+function observeStore(store, onChange) {
+  let currentState;
+
+  function handleChange() {
+    let nextState = store.getState();
+    if (nextState !== currentState) {
+      currentState = nextState;
+      onChange(currentState);
+    }
+  }
+
+  let unsubscribe = store.subscribe(handleChange);
+  handleChange();
+  return unsubscribe;
+}
+
 
 const defaultCardsForDemostration = [{
   imageUrl: "https://www.adidas.com/dis/dw/image/v2/aaqx_prd/on/demandware.static/-/Sites-adidas-products/en_US/dw24d21a41/zoom/CQ2128_01_standard.jpg?sh=840&strip=false&sw=840",
@@ -50,7 +69,10 @@ function reducers(state, action) {
 
         case "PROCESS_DETAIL":
           let card = action.card;
-          return Object.assign({}, state, { page : action.page, currentCard : card, nfcStatus : false, qrStatus: false, barCodeStatus: false });
+          return Object.assign({}, state, { page : action.page, currentCard : card });
+
+        case "PROCESS_LIST" :
+          return Object.assign({}, state, {page : action.page, nfcStatus : false, qrStatus: false, barCodeStatus: false});
 
         default:
           return Object.assign({}, state, { page : action.page });
@@ -73,6 +95,10 @@ function reducers(state, action) {
       return Object.assign({}, state, { barCodeStatus : !barCodeStatus });
       break;
 
+    case "SUBMIT_ENABLEMENT_DATA" :
+      return Object.assign({}, state, {page : "SUCCESS"});
+      break;
+
     default:
   }
 
@@ -90,6 +116,27 @@ var shareServer = new ReduxShareServer(server,{
 var store = createStore(reducers, null,applyMiddleware( shareServer.getReduxMiddleware()));
 
 
+//observe if all 3 types ticked, then trigger another action to show successful message
+observeStore(store,  (currentState) => {
+  if(currentState.nfcStatus && currentState.qrStatus && currentState.barCodeStatus && currentState.page === 'PROCESS_LIST') {
+    setTimeout(()=> {
+      store.dispatch({type: "SUBMIT_ENABLEMENT_DATA", data: "SAMPLE DATA, just for demo purpose"});
+    }, 1000);
+
+    //TODO: Save data to couchDB in here.
+
+    pouchDB.put({
+      _id: 'ENABLEMENT_' + new Date().getTime(),
+      data : "sample data",
+      timeStamp : new Date().toISOString()
+    }).then(()=>{
+      console.log("success uploading the data!");
+    })
+      .catch(error=>{
+        console.error(error);
+      });
+  }
+});
 
 //bind redux server and express
 app.use('/redux',shareServer.getExpressMiddleware());

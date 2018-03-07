@@ -8,9 +8,7 @@ import { PageRouter } from './pages';
 import { reducers } from './reducer';
 import SyncReduxClient from './lib/redux-share-client';
 
-const location = window.location.hostname;
-
-let reduxShare = new SyncReduxClient('ws://'+location+':2000', { debug : true});
+let reduxShare = new SyncReduxClient('ws://' + window.location.hostname + ':2000', { debug : true});
 let store = createStore(
   reducers, // your reducers, as usual
   applyMiddleware( reduxShare.getReduxMiddleware() )
