@@ -91,37 +91,43 @@ class BarcodeReader {
 
     port.on('data', (code) => {
         let data = code.toString();
-        console.log(data);
-        let prefix;
-        if (data.startsWith("*")) {
-            prefix = "*" ;
-        } else if (data.startsWith("A")) {
-            prefix = "A" ;
-        } else if (data.startsWith("E")) {
-            prefix = "E" ;
-        } else if (data.startsWith("F")) {
-            prefix = "F" ;
-        } else if (data.startsWith("FF")) {
-            prefix = "FF" ;
-        } else if (data.startsWith("#")) {
-            prefix = "#" ;
-        } else if (data.startsWith("QR")) {
-            prefix = "QR" ;
-        } else if (data.startsWith("Dm")) {
-            prefix = "Dm" ;
-        } else if (data.startsWith("P")) {
-            prefix = "P" ;
-        } else {
-            console.log("undetectable barcode")
-        }
+        
+        console.log('BEGIN'+data+'END');
+        if(data.includes('nfc')){
+            console.log('Sending to NFC!!!!')
+            this.store.dispatch({"type":"NFC_SCANNED"});
+        }else{
+            let prefix;
+            if (data.startsWith("*")) {
+                prefix = "*" ;
+            } else if (data.startsWith("A")) {
+                prefix = "A" ;
+            } else if (data.startsWith("E")) {
+                prefix = "E" ;
+            } else if (data.startsWith("F")) {
+                prefix = "F" ;
+            } else if (data.startsWith("FF")) {
+                prefix = "FF" ;
+            } else if (data.startsWith("#")) {
+                prefix = "#" ;
+            } else if (data.startsWith("QR")) {
+                prefix = "QR" ;
+            } else if (data.startsWith("Dm")) {
+                prefix = "Dm" ;
+            } else if (data.startsWith("P")) {
+                prefix = "P" ;
+            } else {
+                console.log("undetectable barcode")
+            }
 
-      if(prefix){
-        if (barcodeTypes[prefix].startsWith('1D_')) {
-            this.store.dispatch({"type":"BARCODE_SCANNED"});
-        } else if (barcodeTypes[prefix].startsWith('2D_')) {
-            this.store.dispatch({"type":"QR_SCANNED"});
-        } 
-      } 
+            if(prefix){
+                if (barcodeTypes[prefix].startsWith('1D_')) {
+                    this.store.dispatch({"type":"BARCODE_SCANNED"});
+                } else if (barcodeTypes[prefix].startsWith('2D_')) {
+                    this.store.dispatch({"type":"QR_SCANNED"});
+                } 
+            } 
+        }
     });
   }
 
