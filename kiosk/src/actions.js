@@ -7,3 +7,10 @@ export function showProcessDetail(detail) {
     card: detail
   }
 }
+
+export function showProcessList() {
+  return {
+    type: "PAGE",
+    page: "PROCESS_LIST"
+  }
+}

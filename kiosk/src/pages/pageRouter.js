@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import { Landing, Login, ProcessDetail, ProcessList, Success } from '.';
+import { Landing, Login, ProcessDetail, ProcessList, Success, Splash } from '.';
 
 let style = {
   'backgroundColor': `rgb(3, 86, 109)`,
@@ -18,7 +18,7 @@ let style = {
 function PageRouter(props) {
   const { page } = props;
 
-  let currentPageComponent = <Login/>;
+  let currentPageComponent = <Splash/>;
 
   switch (page) {
     case "LOGIN":
