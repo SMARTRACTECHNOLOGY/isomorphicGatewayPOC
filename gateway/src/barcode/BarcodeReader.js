@@ -41,8 +41,7 @@ class BarcodeReader {
                     SerialPort.list().then(ports=>{
 
                         var barcodePorts = ports.filter(port=>{
-                            console.log(port);
-                            return port.manufacturer.startsWith('Datalogic');
+                            return (port.manufacturer)?port.manufacturer.startsWith('Datalogic'):false;
                         });
                         if(barcodePorts && barcodePorts.length >0){
                             clearInterval(interval);
@@ -80,6 +79,7 @@ class BarcodeReader {
   
 
   activateBarcodeReader(comportName){
+      console.log('activating barcode reader!!!!')
     const port = new SerialPort(comportName);
     port.on('open', () => {
       console.log('Port Opened');
