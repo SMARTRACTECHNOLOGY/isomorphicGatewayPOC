@@ -1,4 +1,4 @@
-let PouchDB = require('pouchBD');
+let PouchDB = require('pouchdb');
 
 const remote_db = 'http://54.175.223.244:5984/sync_db';
 const local_db = 'sync_db';
@@ -23,4 +23,5 @@ pouchDB.sync(remote_db, {
   // totally unhandled error (shouldn't happen)
 });
 
-exports.pouchDB = pouchDB;
+
+module.exports = pouchDB;

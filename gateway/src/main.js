@@ -1,6 +1,6 @@
 import { createStore,applyMiddleware } from 'redux';
 import ReduxShareServer from './redux-share-server';
-// let pouchDB = require('./db');
+let pouchDB = require('./db');
 
 var url = require('url')
   , server = require('http').createServer()
@@ -122,7 +122,17 @@ observeStore(store,  (currentState) => {
     }, 1000);
 
     //TODO: Save data to couchDB in here.
-    console.log("success uploading the data!");
+
+    pouchDB.put({
+      _id: 'ENABLEMENT_' + new Date().getTime(),
+      data : "sample data",
+      timeStamp : new Date().toISOString()
+    }).then(()=>{
+      console.log("success uploading the data!");
+    })
+      .catch(error=>{
+        console.error(error);
+      });
   }
 });
 
