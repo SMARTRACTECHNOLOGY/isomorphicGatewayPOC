@@ -2,6 +2,9 @@ let PouchDB = require('pouchdb');
 
 const remote_db = 'http://54.175.223.244:5984/sync_db';
 const local_db = 'sync_db';
+const nano = require('nano')('http://54.175.223.244:5984');
+
+
 
 let pouchDB = new PouchDB('./'+local_db);
 
@@ -23,5 +26,16 @@ pouchDB.sync(remote_db, {
   // totally unhandled error (shouldn't happen)
 });
 
+var sync_db = nano.db.use('sync_db');
+sync_db.list(function(err, body) {
+  if (!err) {
+    body.rows.forEach(function(doc) {
+      sync_db.destroy(doc.key, doc.value.rev, function(err, body) {
+        if (!err) console.log(body);
+        else console.error(err);
+      });
+    });
+  }
+});
 
 module.exports = pouchDB;

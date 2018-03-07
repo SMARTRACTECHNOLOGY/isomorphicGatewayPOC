@@ -1,5 +1,7 @@
 import { createStore,applyMiddleware } from 'redux';
 import ReduxShareServer from './redux-share-server';
+import BarcodeReader from './barcode/BarcodeReader';
+
 let pouchDB = require('./db');
 
 var url = require('url')
@@ -148,4 +150,14 @@ server.listen(port, function () {
 	console.log('GET http://localhost:'+server.address().port+'/redux/state to view the state');
 	console.log('POST http://localhost:'+server.address().port+'/redux/action to post an action to all clients');
 	console.log('curl -H "Content-Type: application/json" -X POST -d \'{"type":"my-action"}\'  http://localhost:'+server.address().port+'/redux/action');
+});
+
+var barcodeReader = new BarcodeReader(store);
+barcodeReader.run();
+
+process.on('SIGINT', function() {
+  console.log( "\nGracefully shutting down from SIGINT (Ctrl-C)" );
+  // some other closing procedures go here
+  barcodeReader.shutDown();
+  process.exit(1);
 });
