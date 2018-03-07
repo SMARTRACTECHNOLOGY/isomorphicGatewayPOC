@@ -120,6 +120,9 @@ observeStore(store,  (currentState) => {
     setTimeout(()=> {
       store.dispatch({type: "SUBMIT_ENABLEMENT_DATA", data: "SAMPLE DATA, just for demo purpose"});
     }, 1000);
+
+    //TODO: Save data to couchDB in here.
+
   }
 });
 
