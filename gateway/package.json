@@ -20,6 +20,7 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "http": "0.0.0",
+    "nano": "^6.4.3",
     "pouchdb": "^6.4.3",
     "redux": "^3.7.2",
     "serialport": "^6.1.1",
