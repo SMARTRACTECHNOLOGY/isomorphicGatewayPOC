@@ -122,7 +122,7 @@ observeStore(store,  (currentState) => {
     }, 1000);
 
     //TODO: Save data to couchDB in here.
-
+    console.log("success uploading the data!");
   }
 });
 
