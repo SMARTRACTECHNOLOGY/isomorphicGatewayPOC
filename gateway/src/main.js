@@ -1,12 +1,12 @@
-var server = require('http').createServer()
-  , url = require('url')
-  , express = require('express')
-  , app = express()
-  , port = 2000; 
-  
-
 import { createStore,applyMiddleware } from 'redux';
 import ReduxShareServer from './redux-share-server';
+// let pouchDB = require('./db');
+
+var url = require('url')
+  , server = require('http').createServer()
+  , express = require('express')
+  , app = express()
+  , port = 2000;
 
 
 function observeStore(store, onChange) {
