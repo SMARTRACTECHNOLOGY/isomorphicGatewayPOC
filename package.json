@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "autoprefixer": "7.1.6",
+    "babel-preset-env": "^1.6.1",
     "babel-cli": "^6.26.0",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
@@ -35,6 +36,7 @@
     "material-ui-icons": "^1.0.0-beta.35",
     "md5": "^2.2.1",
     "nano": "^6.4.3",
+    "nodemon": "^1.17.1",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
@@ -52,12 +54,20 @@
     "webpack": "3.8.1",
     "webpack-dev-server": "2.9.4",
     "webpack-manifest-plugin": "1.3.2",
-    "whatwg-fetch": "2.0.3"
+    "whatwg-fetch": "2.0.3",
+    "body-parser": "^1.18.2",
+    "http": "0.0.0",
+    "pouchdb": "^6.4.3",
+    "serialport": "^6.1.1",
+    "url": "^0.11.0",
+    "usb-detection": "^2.1.0",
+    "ws": "^4.1.0"
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "build": "node scripts/build.js && ./node_modules/.bin/babel  ./src/server -d ./dist",
+    "test": "node scripts/test.js --env=jsdom",
+    "startServer" : "BABEL_ENV=development node_modules/.bin/nodemon src/server/main.js --exec node_modules/.bin/babel-node --presets env,es2015"
   },
   "jest": {
     "collectCoverageFrom": [

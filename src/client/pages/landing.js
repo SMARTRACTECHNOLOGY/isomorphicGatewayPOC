@@ -6,7 +6,7 @@ import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
 import { connect } from 'react-redux'
 import {showProcessDetail} from '../actions'
-import { ProcessCard } from '.';
+import { ProcessCard } from './index';
 
 let styles = {
   landing : {

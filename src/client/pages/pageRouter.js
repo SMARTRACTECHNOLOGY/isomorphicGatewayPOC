@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import { Landing, Login, ProcessDetail, ProcessList, Success, Splash } from '.';
+import { Landing, Login, ProcessDetail, ProcessList, Success, Splash } from './index';
 
 let style = {
   'backgroundColor': `rgb(3, 86, 109)`,
