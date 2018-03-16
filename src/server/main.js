@@ -8,8 +8,10 @@ var url = require('url')
   , server = require('http').createServer()
   , express = require('express')
   , app = express()
-  , port = 2000;
+  , port = 2000;  // we can make port number configurable if required.
 
+
+app.use(express.static('public'));
 
 function observeStore(store, onChange) {
   let currentState;

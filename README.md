@@ -1,16 +1,18 @@
 # isomorphicGatewayPOC
 
 
-Client is reactApp, to launch it, simply type
+To Run both server and client
 ```
 npm install
 npm start
 ```
 
-Server side  (read console output for urls)
+
+If want to see different console log, you can run client and server in seperate 
+
 ```
-npm install
-npm start
+npm startClient
+npm startServer
 ```
 
 
