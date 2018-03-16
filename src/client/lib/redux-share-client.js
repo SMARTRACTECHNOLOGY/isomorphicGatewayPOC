@@ -1,5 +1,3 @@
-import { md5 } from 'md5';
-
 export default class ReduxShareClient {
 
   /**
@@ -115,10 +113,6 @@ export default class ReduxShareClient {
       return result;
     }
   }
-  //
-  // getChecksum(state) {
-  //   return md5(JSON.stringify(state));
-  // }
 
   /**
    * Inits a connection with the server

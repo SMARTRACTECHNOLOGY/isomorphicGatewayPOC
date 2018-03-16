@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { ProcessCard } from '.';
+import { ProcessCard } from './index';
 import { Button, Icon } from 'material-ui';
 
 let styles = {

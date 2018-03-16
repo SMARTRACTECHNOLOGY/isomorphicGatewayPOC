@@ -1,17 +1,28 @@
 # isomorphicGatewayPOC
 
 
-Client is reactApp, to launch it, simply type
+
+## Development Work Flow 
+> Why do we have different flow here? That's becaue developer's experience is also super important.
+Before we can figure out hot reload through express.static load, we'd better run server and client in seperately.
+So that react client still have hot reload which is super convenient for development.
+
 ```
-npm install
+npm install   // first time or any package changed.
+npm startClient
+npm startServer
+```
+
+
+## Production Work Flow
+> WIP. In the end, the react project will be built and served with the same server instance as static resource.
+meanwhile, websocket runs on the same port number. Thus, in actual gateway hardware, we just need to run "node index.js" to bring up EVERYTHING.
+```
+npm install   // first time or any package changed.
 npm start
 ```
 
-Server side  (read console output for urls)
-```
-npm install
-npm start
-```
+
 
 
 Currently, client side assets are serving from client application through localhost:3000

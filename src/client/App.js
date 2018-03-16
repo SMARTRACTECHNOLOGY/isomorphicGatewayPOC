@@ -3,8 +3,8 @@ import {createStore, applyMiddleware} from 'redux';
 import {connect, Provider} from 'react-redux'
 
 import './App.css';
-import Reboot from 'material-ui/Reboot';
-import { PageRouter } from './pages';
+import CssBaseline from 'material-ui/CssBaseline';
+import { PageRouter } from './pages/index';
 import { reducers } from './reducer';
 import SyncReduxClient from './lib/redux-share-client';
 
@@ -22,7 +22,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="App">
-          <Reboot/>
+          <CssBaseline/>
           <PageRouter/>
         </div>
       </Provider>
