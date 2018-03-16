@@ -1,4 +1,6 @@
 node_modules/
-.idea/workspace.xml
-/gateway/sync_db
+.idea/
+build/
+dist/
+sync_db/
 yarn.lock
