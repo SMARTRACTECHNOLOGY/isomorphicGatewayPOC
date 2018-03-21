@@ -1,4 +1,4 @@
-export const NEW_ENABLEMENT = "NEW_ENABLEMENT"
+export const NEW_ENABLEMENT = "NEW_ENABLEMENT";
 
 export function showProcessDetail(detail) {
   return {

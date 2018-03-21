@@ -133,4 +133,4 @@ class BarcodeReader {
 
 }
 
-module.exports = BarcodeReader;
+export default BarcodeReader;

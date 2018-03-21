@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import { connect } from 'react-redux'
 import logo from './logo.png';
-import {showProcessList} from '../actions'
+import {showProcessList} from '../../shared/actions'
 
 
 

@@ -5,7 +5,7 @@ import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
 import { connect } from 'react-redux'
-import {showProcessDetail} from '../actions'
+import {showProcessDetail} from '../../shared/actions'
 import { ProcessCard } from './index';
 
 let styles = {

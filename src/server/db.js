@@ -38,4 +38,4 @@ sync_db.list(function(err, body) {
   }
 });
 
-module.exports = pouchDB;
+export default pouchDB;
