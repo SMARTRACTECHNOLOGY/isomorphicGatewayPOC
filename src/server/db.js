@@ -26,7 +26,7 @@ pouchDB.sync(remote_db, {
   // totally unhandled error (shouldn't happen)
 });
 
-var sync_db = nano.db.use('sync_db');
+const sync_db = nano.db.use('sync_db');
 sync_db.list(function(err, body) {
   if (!err) {
     body.rows.forEach(function(doc) {

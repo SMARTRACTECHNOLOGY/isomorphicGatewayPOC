@@ -1,4 +1,6 @@
-function observeStore(store, onChange) {
+// @flow
+
+function observeStore(store : Object, onChange : (Object) => void ): Object {
   let currentState;
 
   function handleChange() {
@@ -9,7 +11,7 @@ function observeStore(store, onChange) {
     }
   }
 
-  let unsubscribe = store.subscribe(handleChange);
+  const unsubscribe = store.subscribe(handleChange);
   handleChange();
   return unsubscribe;
 }

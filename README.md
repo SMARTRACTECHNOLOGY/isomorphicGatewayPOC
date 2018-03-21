@@ -58,3 +58,16 @@ curl -H "Content-Type: application/json" -X POST -d '{"type":"BARCODE_SCANNED"}'
 
 ```
 
+
+
+## Flow Support
+### Why Flow for this project? 
+
+1. Flow is a type checking solution backed up by Facebook
+2. Flow can be used for any javascript projects including React Apps or Nodejs Applications
+3. Flow should not have performance impacts on compiled code but propTypes impacts performance badly when development.
+4. Comparing to PropTypes, Flow can support the entire React Codebase
+5. Flow has great IDE support, with it, you will get better auto completion and type checks during coding. 
+
+### Enable Flow in Intellij IDEA
+https://www.jetbrains.com/help/idea/flow.html

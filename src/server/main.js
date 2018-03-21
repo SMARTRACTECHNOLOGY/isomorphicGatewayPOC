@@ -1,3 +1,5 @@
+// @flow
+
 import { createStore,applyMiddleware } from 'redux';
 import ReduxShareServer from './redux-share-server';
 import BarcodeReader from './barcode/BarcodeReader';
@@ -11,7 +13,6 @@ const url = require('url')
   , express = require('express')
   , app = express()
   , port = 2000;  // we can make port number configurable if required.
-
 
 app.use(express.static('public'));
 
