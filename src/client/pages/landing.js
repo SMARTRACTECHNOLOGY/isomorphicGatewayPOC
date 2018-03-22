@@ -1,9 +1,4 @@
 import React from 'react';
-import { Button } from 'material-ui';
-import Card, { CardActions, CardContent } from 'material-ui/Card';
-import Grid from 'material-ui/Grid';
-import Typography from 'material-ui/Typography';
-import { withStyles } from 'material-ui/styles';
 import { connect } from 'react-redux'
 import {showProcessDetail} from '../../shared/actions'
 import { ProcessCard } from './index';
@@ -19,10 +14,10 @@ let styles = {
     margin: 20,
     cursor: 'pointer'
   }
-}
+};
 
 function Landing(props) {
-  const { classes, count, showProcessDetail, cards } = props;
+  const { showProcessDetail, cards } = props;
 
   return (<div className="animated fadeInRight" style={styles.landing}>
       {cards.map(card=> {
@@ -39,16 +34,16 @@ const mapStateToProps = (state, ownProps) => {
   return {
     ...state
   }
-}
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     showProcessDetail: (detail) => {
       console.log("detail is ====>");
-      console.log(detail)
+      console.log(detail);
       dispatch(showProcessDetail(detail))
     }
   }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Landing);

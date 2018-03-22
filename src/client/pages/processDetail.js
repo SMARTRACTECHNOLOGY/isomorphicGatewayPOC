@@ -37,7 +37,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     ...state
   }
-}
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
@@ -46,6 +46,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
               "page" : "LANDING"
              })
   }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProcessDetail);

@@ -1,7 +1,5 @@
 import React from 'react';
-import { Button } from 'material-ui';
-import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
+import Card, { CardContent, CardMedia } from 'material-ui/Card';
 import { withStyles } from 'material-ui/styles';
 import { connect } from 'react-redux'
 
@@ -53,10 +51,10 @@ const mapStateToProps = (state, ownProps) => {
   return {
     ...state
   }
-}
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {}
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ProcessCard));

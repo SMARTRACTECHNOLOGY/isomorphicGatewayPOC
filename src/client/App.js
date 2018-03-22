@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {createStore, applyMiddleware} from 'redux';
-import {connect, Provider} from 'react-redux'
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux'
 import './App.css';
 import CssBaseline from 'material-ui/CssBaseline';
 import { PageRouter } from './pages/index';

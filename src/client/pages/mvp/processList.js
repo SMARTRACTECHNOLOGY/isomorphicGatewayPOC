@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from 'material-ui';
 import { connect } from 'react-redux'
 import ProcessStep from './processStep';
 
@@ -28,10 +27,10 @@ const mapStateToProps = (state, ownProps) => {
   return {
     ...state
   }
-}
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {}
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProcessList);

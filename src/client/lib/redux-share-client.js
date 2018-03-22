@@ -95,12 +95,10 @@ export default class ReduxShareClient {
   getReduxMiddleware () {
     return store => next => action => {
 
+      let result = null;
       //should dispatch?
       if(this.options.shouldDispatch.apply(this,action) ) {
-        var result = next(action);
-      }
-      else {
-        var result = null;
+        result = next(action);
       }
 
       // If the action have been already emited, we don't send it back to the server
@@ -123,7 +121,7 @@ export default class ReduxShareClient {
     this.ws = new WebSocket(this.url);
 
     if(store === null ) {
-      throw 'You must provide a redux store as the sole parameter of the init function.';
+      throw new Error('You must provide a redux store as the sole parameter of the init function.');
     }
 
     this.store = store;
@@ -134,7 +132,7 @@ export default class ReduxShareClient {
 
     this.ws.onopen = function () {
       this.log('Socket initialized, sending a dump of the full state to the server.');
-      if (typeof(this.options.onConnect) == 'function') {
+      if (typeof(this.options.onConnect) === 'function') {
         this.options.onConnect.apply(this,[this.ws]);
       }
 
@@ -149,7 +147,7 @@ export default class ReduxShareClient {
 
       let action = JSON.parse(actionRaw);
 
-      if (typeof(this.options.onActionReceived) == 'function') {
+      if (typeof(this.options.onActionReceived) === 'function') {
         action = this.options.onActionReceived.apply(this, [action])
       }
 
@@ -185,7 +183,7 @@ export default class ReduxShareClient {
       this.log("Reconnecting automatically... "+this.connectTriesCount++);
       setTimeout(this.init.bind(this, this.store), this.options.autoReconnectDelay)
     }
-    else if(this.connectTriesCount == this.options.autoReconnectMaxTries) {
+    else if(this.connectTriesCount === this.options.autoReconnectMaxTries) {
       this.log("Reached the maximum of authorized reconnect tries.");
       this.store.dispatch({type: "@@SYNC-CONNECT-SERVER-FAILED-FATAL", url: this.url});
     }

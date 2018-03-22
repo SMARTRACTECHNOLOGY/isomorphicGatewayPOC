@@ -16,8 +16,6 @@ const styles = {
 };
 
 function Login(props) {
-  const {} = props;
-
   return (
         <div className="animated fadeIn">
           <img src={logo} alt="logo"  style={styles.logo}/>
@@ -30,11 +28,11 @@ const mapStateToProps = (state, ownProps) => {
   return {
     ...state
   }
-}
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
   }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login));

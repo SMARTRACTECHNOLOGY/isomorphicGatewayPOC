@@ -1,4 +1,3 @@
-import {NEW_ENABLEMENT} from './actions'
 import { isClient } from "./env";
 
 const defaultCardsForDemostration = [

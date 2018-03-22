@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
+import Card from 'material-ui/Card';
 import nfcIcon from '../../asserts/nfc.svg';
 import barcordIcon from '../../asserts/barcode.svg';
 import qrIcon from '../../asserts/qr.svg';
