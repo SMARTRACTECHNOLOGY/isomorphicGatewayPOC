@@ -9,18 +9,37 @@ So that react client still have hot reload which is super convenient for develop
 
 ```
 npm install   // first time or any package changed.
-npm startClient
+npm startClient   // Then access http://localhost:3000 ( websocket is using 2000 )
 npm startServer
 ```
 
 
 ## Production Work Flow
-> WIP. In the end, the react project will be built and served with the same server instance as static resource.
-meanwhile, websocket runs on the same port number. Thus, in actual gateway hardware, we just need to run "node index.js" to bring up EVERYTHING.
 ```
 npm install   // first time or any package changed.
-npm run build   // need to set NODE_ENV=production or development
+npm run buildAll:run   // need to set NODE_ENV=production or development before build
 ```
+The build and run process will do below things:
+1) Build Client React Code, and put them into dist/public folder
+2) Build Server Code to a single index.js, including transpilation and include all imported files except node modules.
+3) Copy only node_modules included in "dependencies" to dist/node_modules  (devDependencies will not be copied) 
+4) Run server with command "node dist/index.js"
+
+
+> The tricky part is that, our server app is serving two purposes
+  1) It will serves our react app static files from relative "public" folder, thus, no additional http server is required
+  2) It is also a websocket server, which will listen to the redux actions. 
+
+
+in our RPM, we should simply do a buildAll and then zip all files under dist folder, then after installed in linux machine,
+we should simply run "node index.js" and everything should work out of box.
+
+## Things are pending
+We will need to make our application more configurable, for example, we should be able to configure
+ * Different port number for http server & websocket
+ * local pouchDB
+ * remote couch DB url
+ * credential for remote couch DB
 
 
 ## Flow Support
