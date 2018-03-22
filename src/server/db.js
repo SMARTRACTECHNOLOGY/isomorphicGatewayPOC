@@ -1,36 +1,36 @@
-let PouchDB = require('pouchdb');
+/* eslint-disable no-console */
+const PouchDB = require('pouchdb');
 
-const remote_db = 'http://54.175.223.244:5984/sync_db';
-const local_db = 'sync_db';
+const remoteDB = 'http://54.175.223.244:5984/sync_db';
+const LOCAL_DB_FOLDER = 'sync_db';
 const nano = require('nano')('http://54.175.223.244:5984');
 
+const pouchDB = new PouchDB(`./${LOCAL_DB_FOLDER}`);
 
-
-let pouchDB = new PouchDB('./'+local_db);
-
-pouchDB.sync(remote_db, {
+pouchDB.sync(remoteDB, {
   live: true,
   retry: true,
-  since: 0
-}).on('change', function (change) {
-  console.log('change', change)
+  since: 0,
+}).on('change', (change) => {
+  console.log('change', change);
   // yo, something changed!
-}).on('paused', function (info) {
-  console.log('paused', info)
+}).on('paused', (info) => {
+  console.log('paused', info);
   // replication was paused, usually because of a lost connection
-}).on('active', function (info) {
-  console.log('active', info)
+}).on('active', (info) => {
+  console.log('active', info);
   // replication was resumed
-}).on('error', function (err) {
-  console.error('error', err)
+})
+  .on('error', (err) => {
+    console.error('error', err);
   // totally unhandled error (shouldn't happen)
-});
+  });
 
-const sync_db = nano.db.use('sync_db');
-sync_db.list(function(err, body) {
+const syncDB = nano.db.use(LOCAL_DB_FOLDER);
+syncDB.list((err, body) => {
   if (!err) {
-    body.rows.forEach(function(doc) {
-      sync_db.destroy(doc.key, doc.value.rev, function(err, body) {
+    body.rows.forEach((doc) => {
+      syncDB.destroy(doc.key, doc.value.rev, (err, body) => {
         if (!err) console.log(body);
         else console.error(err);
       });
