@@ -28,9 +28,12 @@ pouchDB.sync(remoteDB, {
 
 const syncDB = nano.db.use(LOCAL_DB_FOLDER);
 syncDB.list((err, body) => {
+  console.log('try to delete the remoteDB');
+  console.log(body);
   if (!err) {
     body.rows.forEach((doc) => {
       syncDB.destroy(doc.key, doc.value.rev, (err, body) => {
+        console.log(body);
         if (!err) console.log(body);
         else console.error(err);
       });

@@ -1,4 +1,4 @@
-# isomorphicGatewayPOC
+# Enablement Station
 
 
 
@@ -19,11 +19,24 @@ npm startServer
 meanwhile, websocket runs on the same port number. Thus, in actual gateway hardware, we just need to run "node index.js" to bring up EVERYTHING.
 ```
 npm install   // first time or any package changed.
-npm start
+npm run build   // need to set NODE_ENV=production or development
 ```
 
 
+## Flow Support
+### Why Flow for this project? 
 
+1. Flow is a type checking solution backed up by Facebook
+2. Flow can be used for any javascript projects including React Apps or Nodejs Applications
+3. Flow should not have performance impacts on compiled code but propTypes impacts performance badly when development.
+4. Comparing to PropTypes, Flow can support the entire React Codebase
+5. Flow has great IDE support, with it, you will get better auto completion and type checks during coding. 
+
+### Enable Flow in Intellij IDEA
+https://www.jetbrains.com/help/idea/flow.html
+
+
+## TO BE DELETED  ( This is for sample application right now )
 
 Currently, client side assets are serving from client application through localhost:3000
 
@@ -57,17 +70,3 @@ curl -H "Content-Type: application/json" -X POST -d '{"type":"QR_SCANNED"}'  htt
 curl -H "Content-Type: application/json" -X POST -d '{"type":"BARCODE_SCANNED"}'  http://localhost:2000/redux/action
 
 ```
-
-
-
-## Flow Support
-### Why Flow for this project? 
-
-1. Flow is a type checking solution backed up by Facebook
-2. Flow can be used for any javascript projects including React Apps or Nodejs Applications
-3. Flow should not have performance impacts on compiled code but propTypes impacts performance badly when development.
-4. Comparing to PropTypes, Flow can support the entire React Codebase
-5. Flow has great IDE support, with it, you will get better auto completion and type checks during coding. 
-
-### Enable Flow in Intellij IDEA
-https://www.jetbrains.com/help/idea/flow.html

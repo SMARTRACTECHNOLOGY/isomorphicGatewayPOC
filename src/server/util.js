@@ -1,10 +1,11 @@
 // @flow
+import path from 'path';
 
-function observeStore(store : Object, onChange : (Object) => void ): Object {
+function observeStore(store : Object, onChange : (Object) => void): Object {
   let currentState;
 
   function handleChange() {
-    let nextState = store.getState();
+    const nextState = store.getState();
     if (nextState !== currentState) {
       currentState = nextState;
       onChange(currentState);

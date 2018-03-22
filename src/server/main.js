@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 // @flow
 
+import path from 'path';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxShareServer from './redux-share-server';
 import BarcodeReader from './barcode/BarcodeReader';
@@ -15,7 +16,10 @@ const express = require('express');
 const app = express();
 const port = 2000; // we can make port number configurable if required.
 
-app.use(express.static('public'));
+// Make sure our react assets are always related to our server index.js
+// This will allow us to run index.js from any folder
+const dirName = path.dirname(process.argv[1]);
+app.use(express.static(`${dirName}/public`));
 
 // start the sockets etc.
 const shareServer = new ReduxShareServer(server, {
